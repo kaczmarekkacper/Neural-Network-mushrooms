@@ -34,8 +34,6 @@ class CapColor(Enum):
     Red = 8
     White = 9
     Yellow = 10
-    Bruises = 11
-    No = 12
 
 
 class Bruises(Enum):
