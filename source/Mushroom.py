@@ -1,4 +1,4 @@
-import MushroomInfo as mi
+import source.MushroomInfo as mi
 
 
 class Mushroom:

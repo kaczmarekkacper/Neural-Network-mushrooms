@@ -1,6 +1,6 @@
 import unittest
-import Mushroom
-import MushroomInfo as mi
+import source.Mushroom as Mushroom
+import source.MushroomInfo as mi
 
 
 class MyEdible(unittest.TestCase):
