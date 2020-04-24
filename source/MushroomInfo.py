@@ -60,7 +60,7 @@ class GillAttachment(Enum):
     Notched = 4
 
 
-class GrillSpacing(Enum):
+class GillSpacing(Enum):
     Close = 1
     Crowded = 2
     Distant = 3
