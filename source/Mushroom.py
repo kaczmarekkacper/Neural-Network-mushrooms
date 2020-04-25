@@ -2,8 +2,8 @@ import source.MushroomInfo as Mi
 
 
 class Mushroom:
-    def __init__(self, vec, boolean):
-        self.edible = self.set_edible(vec[0], boolean)
+    def __init__(self, vec):
+        self.edible = self.set_edible(vec[0])
         self.capShape = self.set_capshape(vec[1])
         self.capSurface = self.set_capsurface(vec[2])
         self.capColor = self.set_capcolor(vec[3])
@@ -27,16 +27,16 @@ class Mushroom:
         self.population = self.set_population(vec[21])
         self.habitat = self.set_habitat(vec[22])
 
+    def set_edible_no_info(self):
+        self.edible = Mi.Edible.NoInfo
+
     @staticmethod
-    def set_edible(feature, boolean):
-        if boolean:
-            if feature == "e":
-                return Mi.Edible.Yes
-            if feature == "p":
-                return Mi.Edible.No
-            raise ValueError("No such value in mi.Edible")
-        else:
-            return Mi.Edible.NoInfo
+    def set_edible(feature):
+        if feature == "e":
+            return Mi.Edible.Yes
+        if feature == "p":
+            return Mi.Edible.No
+        raise ValueError("No such value in mi.Edible")
 
     @staticmethod
     def set_capshape(feature):
