@@ -40,16 +40,16 @@ def make_sets(edible_mushrooms, poisonous_mushrooms):
     poisonous_half = round(len(poisonous_mushrooms)/2)
     # split edible
     for i in range(edible_half):
-        edible_mushrooms[i].set_edible_no_info()
         training_set.append(edible_mushrooms[i])
-    for i in range(edible_half, len(edible_mushrooms)-1):
+    for i in range(edible_half, len(edible_mushrooms)):
         validation_set.append(edible_mushrooms[i])
     # split poisonous
     for i in range(poisonous_half):
-        poisonous_mushrooms[i].set_edible_no_info()
         training_set.append(poisonous_mushrooms[i])
-    for i in range(poisonous_half, len(poisonous_mushrooms)-1):
+    for i in range(poisonous_half, len(poisonous_mushrooms)):
         validation_set.append(poisonous_mushrooms[i])
+    random.shuffle(training_set)
+    random.shuffle(validation_set)
     return training_set, validation_set
 
 

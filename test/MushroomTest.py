@@ -18,14 +18,6 @@ class TestSetEdible(unittest.TestCase):
         mushroom = Mushroom.Mushroom(vec)
         self.assertEqual(mushroom.edible == Mi.Edible.No, True)
 
-    def test_set_ediable_noinfo(self):
-        vec = ['e', 'x', 's', 'n', 't', 'p', 'f', 'c', 'n', 'k',
-               'e', 'e', 's', 's', 'w', 'w', 'p', 'w', 'o', 'p',
-               'k', 's', 'u']
-        mushroom = Mushroom.Mushroom(vec)
-        mushroom.set_edible_no_info()
-        self.assertEqual(mushroom.edible == Mi.Edible.NoInfo, True)
-
     def test_set_edible_wrong_value(self):
         vec = ['g', 'x', 's', 'n', 't', 'p', 'f', 'c', 'n', 'k',
                'e', 'e', 's', 's', 'w', 'w', 'p', 'w', 'o', 'p',

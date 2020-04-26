@@ -3,6 +3,7 @@ import source.MushroomInfo as Mi
 
 class Mushroom:
     def __init__(self, vec):
+        self.prediction = Mi.Edible.NoInfo
         self.edible = self.set_edible(vec[0])
         self.capShape = self.set_capshape(vec[1])
         self.capSurface = self.set_capsurface(vec[2])
@@ -26,9 +27,6 @@ class Mushroom:
         self.sporePrintColor = self.set_spore_print_color(vec[20])
         self.population = self.set_population(vec[21])
         self.habitat = self.set_habitat(vec[22])
-
-    def set_edible_no_info(self):
-        self.edible = Mi.Edible.NoInfo
 
     @staticmethod
     def set_edible(feature):
