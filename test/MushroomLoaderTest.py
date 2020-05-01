@@ -1,6 +1,6 @@
 import unittest
 import source.MushroomLoader as Ml
-import source.Mushroom as M
+import source.Mushroom as Mushroom
 
 
 class TestImportParams(unittest.TestCase):
@@ -38,7 +38,6 @@ class TestGetMushroomInList(unittest.TestCase):
     def test_import_mushrooms_everything(self):
         ml = Ml.MushroomLoader('../data/agaricus-lepiota.data')
         mushrooms = ml.import_mushrooms()
-        mushroom = ml.get_mushroom_in_list(mushrooms[0])
         self.assertEqual(mushrooms.__len__(), 8124)
 
 
@@ -50,8 +49,8 @@ class TestCreateAMushroom(unittest.TestCase):
         ml = Ml.MushroomLoader('../data/agaricus-lepiota.data')
         mushrooms = ml.import_mushrooms()
         mushroom = ml.get_mushroom_in_list(mushrooms[0])
-        m1 = M.Mushroom(mushroom)
-        m2 = M.Mushroom(vec)
+        m1 = Mushroom.Mushroom(mushroom)
+        m2 = Mushroom.Mushroom(vec)
         self.assertEqual(m1.edible, m2.edible)
         self.assertEqual(m1.capShape, m2.capShape)
         self.assertEqual(m1.capSurface, m2.capSurface)
