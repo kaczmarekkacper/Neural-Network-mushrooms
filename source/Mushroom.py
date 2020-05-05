@@ -28,6 +28,21 @@ class Mushroom:
         self.population = self.set_population(vec[21])
         self.habitat = self.set_habitat(vec[22])
 
+    def get_vector(self):
+        vec = [self.capShape.value, self.capSurface.value, self.capColor.value, self.bruises.value,
+               self.odor.value, self.gillAttachment.value, self.gillSpacing.value, self.gillSize.value,
+               self.gillColor.value, self.stalkShape.value, self.stalkRoot.value,
+               self.stalkSurfaceAboveRing.value, self.stalkSurfaceBelowRing.value, self.stalkColorAboveRing.value,
+               self.stalkColorBelowRing.value, self.veilType.value, self.veilColor.value, self.ringNumber.value,
+               self.ringType.value, self.sporePrintColor.value, self.population.value, self.habitat.value]
+        return vec
+
+    def check_prediction(self):
+        if self.prediction == self.edible:
+            return 0
+        else:
+            return 1
+
     @staticmethod
     def set_edible(feature):
         if feature == "e":
@@ -330,18 +345,12 @@ class Mushroom:
             return Mi.SporePrintColor.Buff
         if feature == 'h':
             return Mi.SporePrintColor.Chocolate
-        if feature == 'g':
-            return Mi.SporePrintColor.Gray
         if feature == 'r':
             return Mi.SporePrintColor.Green
         if feature == 'o':
             return Mi.SporePrintColor.Orange
-        if feature == 'p':
-            return Mi.SporePrintColor.Pink
         if feature == 'u':
             return Mi.SporePrintColor.Purple
-        if feature == 'e':
-            return Mi.SporePrintColor.Red
         if feature == 'w':
             return Mi.SporePrintColor.White
         if feature == 'y':

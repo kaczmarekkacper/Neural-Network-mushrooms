@@ -3,6 +3,16 @@ import source.Mushroom as Mushroom
 import source.MushroomInfo as Mi
 
 
+class TestGetVector(unittest.TestCase):
+    def test_getVector(self):
+        vec = ['e', 'x', 's', 'n', 't', 'p', 'f', 'c', 'n', 'k',
+               'e', 'e', 's', 's', 'w', 'w', 'p', 'w', 'o', 'p',
+               'k', 's', 'u']
+        mushroom = Mushroom.Mushroom(vec)
+        vec = [3, 4, 1, 1, 8, 3, 1, 2, 1, 1, 4, 4, 4, 8, 8, 1, 3, 2, 6, 1, 4, 5]
+        self.assertListEqual(mushroom.get_vector(), vec)
+
+
 class TestSetEdible(unittest.TestCase):
     def test_set_edible_yes(self):
         vec = ['e', 'x', 's', 'n', 't', 'p', 'f', 'c', 'n', 'k',
@@ -77,36 +87,36 @@ class TestSetCapShape(unittest.TestCase):
             Mushroom.Mushroom(vec)
 
 
-class TestSetCapsurface(unittest.TestCase):
-    def test_set_capsurface_fibrous(self):
+class TestSetCapSurface(unittest.TestCase):
+    def test_set_cap_surface_fibrous(self):
         vec = ['p', 'b', 'f', 'n', 't', 'p', 'f', 'c', 'n', 'k',
                'e', 'e', 's', 's', 'w', 'w', 'p', 'w', 'o', 'p',
                'k', 's', 'u']
         mushroom = Mushroom.Mushroom(vec)
         self.assertEqual(mushroom.capSurface == Mi.CapSurface.Fibrous, True)
 
-    def test_set_capsurface_grooves(self):
+    def test_set_cap_surface_grooves(self):
         vec = ['p', 'c', 'g', 'n', 't', 'p', 'f', 'c', 'n', 'k',
                'e', 'e', 's', 's', 'w', 'w', 'p', 'w', 'o', 'p',
                'k', 's', 'u']
         mushroom = Mushroom.Mushroom(vec)
         self.assertEqual(mushroom.capSurface == Mi.CapSurface.Grooves, True)
 
-    def test_set_capsurface_scaly(self):
+    def test_set_cap_surface_scaly(self):
         vec = ['p', 'x', 'y', 'n', 't', 'p', 'f', 'c', 'n', 'k',
                'e', 'e', 's', 's', 'w', 'w', 'p', 'w', 'o', 'p',
                'k', 's', 'u']
         mushroom = Mushroom.Mushroom(vec)
         self.assertEqual(mushroom.capSurface == Mi.CapSurface.Scaly, True)
 
-    def test_set_capsurface_smooth(self):
+    def test_set_cap_surface_smooth(self):
         vec = ['p', 'f', 's', 'n', 't', 'p', 'f', 'c', 'n', 'k',
                'e', 'e', 's', 's', 'w', 'w', 'p', 'w', 'o', 'p',
                'k', 's', 'u']
         mushroom = Mushroom.Mushroom(vec)
         self.assertEqual(mushroom.capSurface == Mi.CapSurface.Smooth, True)
 
-    def test_set_capsurface_wrong_value(self):
+    def test_set_cap_surface_wrong_value(self):
         vec = ['p', 's', 'b', 'n', 't', 'p', 'f', 'c', 'n', 'k',
                'e', 'e', 's', 's', 'w', 'w', 'p', 'w', 'o', 'p',
                'k', 's', 'u']
@@ -115,77 +125,77 @@ class TestSetCapsurface(unittest.TestCase):
 
 
 class TestSetCapColor(unittest.TestCase):
-    def test_set_capcolor_brown(self):
+    def test_set_cap_color_brown(self):
         vec = ['p', 'b', 's', 'n', 't', 'p', 'f', 'c', 'n', 'k',
                'e', 'e', 's', 's', 'w', 'w', 'p', 'w', 'o', 'p',
                'k', 's', 'u']
         mushroom = Mushroom.Mushroom(vec)
         self.assertEqual(mushroom.capColor == Mi.CapColor.Brown, True)
 
-    def test_set_capcolor_buff(self):
+    def test_set_cap_color_buff(self):
         vec = ['p', 'c', 's', 'b', 't', 'p', 'f', 'c', 'n', 'k',
                'e', 'e', 's', 's', 'w', 'w', 'p', 'w', 'o', 'p',
                'k', 's', 'u']
         mushroom = Mushroom.Mushroom(vec)
         self.assertEqual(mushroom.capColor == Mi.CapColor.Buff, True)
 
-    def test_set_capcolor_cinnamon(self):
+    def test_set_cap_color_cinnamon(self):
         vec = ['p', 'x', 's', 'c', 't', 'p', 'f', 'c', 'n', 'k',
                'e', 'e', 's', 's', 'w', 'w', 'p', 'w', 'o', 'p',
                'k', 's', 'u']
         mushroom = Mushroom.Mushroom(vec)
         self.assertEqual(mushroom.capColor == Mi.CapColor.Cinnamon, True)
 
-    def test_set_capcolor_gray(self):
+    def test_set_cap_color_gray(self):
         vec = ['p', 'f', 's', 'g', 't', 'p', 'f', 'c', 'n', 'k',
                'e', 'e', 's', 's', 'w', 'w', 'p', 'w', 'o', 'p',
                'k', 's', 'u']
         mushroom = Mushroom.Mushroom(vec)
         self.assertEqual(mushroom.capColor == Mi.CapColor.Gray, True)
 
-    def test_set_capcolor_green(self):
+    def test_set_cap_color_green(self):
         vec = ['p', 'k', 's', 'r', 't', 'p', 'f', 'c', 'n', 'k',
                'e', 'e', 's', 's', 'w', 'w', 'p', 'w', 'o', 'p',
                'k', 's', 'u']
         mushroom = Mushroom.Mushroom(vec)
         self.assertEqual(mushroom.capColor == Mi.CapColor.Green, True)
 
-    def test_set_capcolor_pink(self):
+    def test_set_cap_color_pink(self):
         vec = ['p', 's', 's', 'p', 't', 'p', 'f', 'c', 'n', 'k',
                'e', 'e', 's', 's', 'w', 'w', 'p', 'w', 'o', 'p',
                'k', 's', 'u']
         mushroom = Mushroom.Mushroom(vec)
         self.assertEqual(mushroom.capColor == Mi.CapColor.Pink, True)
 
-    def test_set_capcolor_purple(self):
+    def test_set_cap_color_purple(self):
         vec = ['p', 'b', 's', 'u', 't', 'p', 'f', 'c', 'n', 'k',
                'e', 'e', 's', 's', 'w', 'w', 'p', 'w', 'o', 'p',
                'k', 's', 'u']
         mushroom = Mushroom.Mushroom(vec)
         self.assertEqual(mushroom.capColor == Mi.CapColor.Purple, True)
 
-    def test_set_capcolor_red(self):
+    def test_set_cap_color_red(self):
         vec = ['p', 'c', 's', 'e', 't', 'p', 'f', 'c', 'n', 'k',
                'e', 'e', 's', 's', 'w', 'w', 'p', 'w', 'o', 'p',
                'k', 's', 'u']
         mushroom = Mushroom.Mushroom(vec)
         self.assertEqual(mushroom.capColor == Mi.CapColor.Red, True)
 
-    def test_set_capcolor_white(self):
+    def test_set_cap_color_white(self):
         vec = ['p', 'x', 's', 'w', 't', 'p', 'f', 'c', 'n', 'k',
                'e', 'e', 's', 's', 'w', 'w', 'p', 'w', 'o', 'p',
                'k', 's', 'u']
         mushroom = Mushroom.Mushroom(vec)
         self.assertEqual(mushroom.capColor == Mi.CapColor.White, True)
 
-    def test_set_capcolor_yellow(self):
+    def test_set_cap_color_yellow(self):
         vec = ['p', 'f', 's', 'y', 't', 'p', 'f', 'c', 'n', 'k',
                'e', 'e', 's', 's', 'w', 'w', 'p', 'w', 'o', 'p',
                'k', 's', 'u']
         mushroom = Mushroom.Mushroom(vec)
         self.assertEqual(mushroom.capColor == Mi.CapColor.Yellow, True)
 
-    def test_set_capcolor_wrong_value(self):
+    def test_set_cap_color_wrong_value(self):
         vec = ['p', 'g', 's', 'f', 't', 'p', 'f', 'c', 'n', 'k',
                'e', 'e', 's', 's', 'w', 'w', 'p', 'w', 'o', 'p',
                'k', 's', 'u']
@@ -954,13 +964,6 @@ class TestSetSporePrintColor(unittest.TestCase):
         mushroom = Mushroom.Mushroom(vec)
         self.assertEqual(mushroom.sporePrintColor == Mi.SporePrintColor.Chocolate, True)
 
-    def test_set_spore_print_color_gray(self):
-        vec = ['p', 'f', 's', 'y', 't', 'p', 'a', 'c', 'n', 'k',
-               'e', 'b', 'f', 'f', 'n', 'w', 'p', 'n', 'n', 'l',
-               'g', 's', 'u']
-        mushroom = Mushroom.Mushroom(vec)
-        self.assertEqual(mushroom.sporePrintColor == Mi.SporePrintColor.Gray, True)
-
     def test_set_spore_print_color_green(self):
         vec = ['p', 'k', 's', 'y', 'f', 'p', 'd', 'w', 'n', 'n',
                't', 'c', 'y', 'y', 'b', 'w', 'u', 'o', 'o', 'n',
@@ -975,26 +978,12 @@ class TestSetSporePrintColor(unittest.TestCase):
         mushroom = Mushroom.Mushroom(vec)
         self.assertEqual(mushroom.sporePrintColor == Mi.SporePrintColor.Orange, True)
 
-    def test_set_spore_print_color_pink(self):
-        vec = ['p', 'f', 's', 'y', 't', 'p', 'a', 'c', 'n', 'k',
-               'e', 'b', 'f', 'f', 'n', 'w', 'p', 'w', 't', 'p',
-               'p', 's', 'u']
-        mushroom = Mushroom.Mushroom(vec)
-        self.assertEqual(mushroom.sporePrintColor == Mi.SporePrintColor.Pink, True)
-
     def test_set_spore_print_color_purple(self):
         vec = ['p', 'f', 's', 'y', 't', 'p', 'a', 'c', 'n', 'k',
                'e', 'b', 'f', 'f', 'n', 'w', 'p', 'n', 'n', 's',
                'u', 's', 'u']
         mushroom = Mushroom.Mushroom(vec)
         self.assertEqual(mushroom.sporePrintColor == Mi.SporePrintColor.Purple, True)
-
-    def test_set_spore_print_color_red(self):
-        vec = ['p', 'f', 's', 'y', 't', 'p', 'a', 'c', 'n', 'k',
-               'e', 'b', 'f', 'f', 'n', 'w', 'p', 'n', 'n', 's',
-               'e', 's', 'u']
-        mushroom = Mushroom.Mushroom(vec)
-        self.assertEqual(mushroom.sporePrintColor == Mi.SporePrintColor.Red, True)
 
     def test_set_spore_print_color_white(self):
         vec = ['p', 'k', 's', 'y', 'f', 'p', 'd', 'w', 'n', 'n',
@@ -1050,7 +1039,7 @@ class TestSetPopulation(unittest.TestCase):
     def test_set_population_several(self):
         vec = ['p', 'f', 's', 'y', 't', 'p', 'a', 'c', 'n', 'k',
                'e', 'b', 'f', 'f', 'n', 'w', 'p', 'n', 'n', 'l',
-               'g', 'v', 'u']
+               'w', 'v', 'u']
         mushroom = Mushroom.Mushroom(vec)
         self.assertEqual(mushroom.population == Mi.Population.Several, True)
 
@@ -1101,7 +1090,7 @@ class TestSetHabitat(unittest.TestCase):
     def test_set_habitat_urban(self):
         vec = ['p', 'f', 's', 'y', 't', 'p', 'a', 'c', 'n', 'k',
                'e', 'b', 'f', 'f', 'n', 'w', 'p', 'n', 'n', 'l',
-               'g', 'y', 'u']
+               'w', 'y', 'u']
         mushroom = Mushroom.Mushroom(vec)
         self.assertEqual(mushroom.habitat == Mi.Habitat.Urban, True)
 

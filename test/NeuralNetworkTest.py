@@ -62,13 +62,13 @@ class TestNNCalculations(unittest.TestCase):
         nn = NN.NeuralNetwork(1, [2], 1)
         nn.set_weights_one()
         nn.calculate_output([0])
-        value = Neuron.Neuron.func(Neuron.Neuron.func(0)*2)
+        value = Neuron.Neuron.func(2*Neuron.Neuron.func(0))
         self.assertEqual(nn.output[0][0], value)
 
         nn = NN.NeuralNetwork(1, [3], 1)
         nn.set_weights_one()
         nn.calculate_output([0])
-        value = Neuron.Neuron.func(Neuron.Neuron.func(0) * 3)
+        value = Neuron.Neuron.func(3*Neuron.Neuron.func(0))
         self.assertEqual(nn.output[0][0], value)
 
     def test_calc_two(self):
@@ -81,13 +81,32 @@ class TestNNCalculations(unittest.TestCase):
         nn = NN.NeuralNetwork(1, [2, 2], 1)
         nn.set_weights_one()
         nn.calculate_output([0])
-        value = Neuron.Neuron.func(2*Neuron.Neuron.func(Neuron.Neuron.func(0)*2))
+        value = Neuron.Neuron.func(2*Neuron.Neuron.func(2*Neuron.Neuron.func(0)))
         self.assertEqual(nn.output[0][0], value)
 
         nn = NN.NeuralNetwork(1, [3, 3], 1)
         nn.set_weights_one()
         nn.calculate_output([0])
-        value = Neuron.Neuron.func(3*Neuron.Neuron.func(Neuron.Neuron.func(0)*3))
+        value = Neuron.Neuron.func(3*Neuron.Neuron.func(3*Neuron.Neuron.func(0)))
+        self.assertEqual(nn.output[0][0], value)
+
+    def test_calc_three(self):
+        nn = NN.NeuralNetwork(1, [1, 1, 1], 1)
+        nn.set_weights_one()
+        nn.calculate_output([0])
+        value = Neuron.Neuron.func(Neuron.Neuron.func(Neuron.Neuron.func(Neuron.Neuron.func(0))))
+        self.assertEqual(nn.output[0][0], value)
+
+        nn = NN.NeuralNetwork(1, [2, 2, 2], 1)
+        nn.set_weights_one()
+        nn.calculate_output([0])
+        value = Neuron.Neuron.func(2*Neuron.Neuron.func(2*Neuron.Neuron.func(2*Neuron.Neuron.func(0))))
+        self.assertEqual(nn.output[0][0], value)
+
+        nn = NN.NeuralNetwork(1, [3, 3, 3], 1)
+        nn.set_weights_one()
+        nn.calculate_output([0])
+        value = Neuron.Neuron.func(3*Neuron.Neuron.func(3*Neuron.Neuron.func(3*Neuron.Neuron.func(0))))
         self.assertEqual(nn.output[0][0], value)
 
 
