@@ -18,6 +18,11 @@ class NeuralNetwork:
                 self.weights.append(np.random.rand(size[i], size[i - 1]+1))
             self.weights.append(np.random.rand(outputs, size[self.hidden_layers-1]+1))
 
+    def calculate_set(self, mushroom_set):
+        for i in range(len(mushroom_set)):
+            output = self.calculate_output(mushroom_set[i].get_vector())
+            mushroom_set[i].set_prediction(output)
+
     def calculate_output(self, vec):
         self.neurons = []
         self.fill_input(vec)
@@ -58,3 +63,11 @@ class NeuralNetwork:
             for i in range(1, self.hidden_layers):
                 self.weights.append(np.ones((self.sizes[i], self.sizes[i - 1]+1)))
             self.weights.append(np.ones((self.output.size, self.sizes[self.hidden_layers - 1]+1)))
+
+    def delta_batch(self, mushroom_set):
+        for i in range(len(mushroom_set)):
+            self.weights = self.weights
+
+    def delta_svg(self, mushroom_set):
+        for i in range(len(mushroom_set)):
+            self.weights = self.weights

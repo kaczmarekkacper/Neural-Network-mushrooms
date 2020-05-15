@@ -27,6 +27,7 @@ class Mushroom:
         self.sporePrintColor = self.set_spore_print_color(vec[20])
         self.population = self.set_population(vec[21])
         self.habitat = self.set_habitat(vec[22])
+        self.error = 0
 
     def get_vector(self):
         vec = [self.capShape.value, self.capSurface.value, self.capColor.value, self.bruises.value,
@@ -36,6 +37,14 @@ class Mushroom:
                self.stalkColorBelowRing.value, self.veilType.value, self.veilColor.value, self.ringNumber.value,
                self.ringType.value, self.sporePrintColor.value, self.population.value, self.habitat.value]
         return vec
+
+    def set_prediction(self, output):
+        if output > 0.5:
+            self.prediction = Mi.Edible.Yes
+            self.error = output - 1
+        else:
+            self.prediction = Mi.Edible.No
+            self.error = output
 
     def check_prediction(self):
         if self.prediction == self.edible:
