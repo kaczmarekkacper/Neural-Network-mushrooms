@@ -4,12 +4,16 @@ import numpy as np
 class Neuron:
     @staticmethod
     def count_value(vec):
-        value = sum(vec) + 1
+        value = sum(vec)
         return Neuron.func(value)
 
     @staticmethod
     def func(value):
         return 1 / (1 + np.e**(-value))
+
+    @staticmethod
+    def der_func(value):
+        return np.multiply(value, np.subtract(1, value))
 
     @staticmethod
     def calculate_value(layer_values):

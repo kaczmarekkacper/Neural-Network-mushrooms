@@ -15,18 +15,16 @@ def main():
     edible_mushrooms, poisonous_mushrooms = split_poisonous(mushrooms)
     training_set, validation_set = make_sets(edible_mushrooms, poisonous_mushrooms)
     nn = Nn.NeuralNetwork(input_number, layers, output_number)
-    if method:
-        nn.delta_svg(training_set)
-    else:
-        nn.delta_batch(training_set)
-    nn.calculate_set(validation_set)
-    print_stats(validation_set)
-    #save_mushrooms(validation_set)
+    for i in range(10):
+        nn.delta_svg(training_set, 0.9)
+        nn.calculate_set(validation_set)
+        print_stats(validation_set)
+    # save_mushrooms(validation_set)
 
 
 def load_params():
-    if len(sys.argv) != 5:
-        exit(1)
+    # if len(sys.argv) != 5:
+    #     exit(1)
     input_number = int(sys.argv[1])
     layers = []
     second_arg = eval(sys.argv[2])
