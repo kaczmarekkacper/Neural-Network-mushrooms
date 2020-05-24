@@ -20,7 +20,7 @@ class NeuralNetwork:
 
     def calculate_set(self, mushroom_set):
         for i in range(len(mushroom_set)):
-            output = self.calculate_output(mushroom_set[i].get_vector())
+            output = self.calculate_output(mushroom_set[i].get_normalized_vector())
             mushroom_set[i].set_prediction(output)
 
     # Dziala na liczbach
@@ -79,7 +79,7 @@ class NeuralNetwork:
         for mushroom in mushroom_set:
             desire_output = 0 if mushroom.edible == mushroom.edible.Yes else 1
             # Forward propagation - outputs of layers in neurons
-            self.calculate_output(mushroom.get_vector())
+            self.calculate_output(mushroom.get_normalized_vector())
             out = self.output
             error += 0.5 * (desire_output - out)**2
             # Compute delta error of the output layer

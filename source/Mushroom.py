@@ -29,13 +29,41 @@ class Mushroom:
         self.habitat = self.set_habitat(vec[22])
         self.error = 0
 
-    def get_vector(self):
+    def get_normalized_vector(self):
         vec = [self.capShape.value, self.capSurface.value, self.capColor.value, self.bruises.value,
                self.odor.value, self.gillAttachment.value, self.gillSpacing.value, self.gillSize.value,
                self.gillColor.value, self.stalkShape.value, self.stalkRoot.value,
                self.stalkSurfaceAboveRing.value, self.stalkSurfaceBelowRing.value, self.stalkColorAboveRing.value,
                self.stalkColorBelowRing.value, self.veilType.value, self.veilColor.value, self.ringNumber.value,
                self.ringType.value, self.sporePrintColor.value, self.population.value, self.habitat.value]
+        vec = Mushroom.normalize_vector(vec)
+        return vec
+
+    @staticmethod
+    def normalize_vector(vec, lower, upper):
+        bound_len = upper - lower
+        vec[1] = bound_len/len(Mi.CapShape)*vec[1]+lower
+        vec[2] = bound_len / len(Mi.CapSurface) * vec[2] + lower
+        vec[3] = bound_len / len(Mi.CapColor) * vec[3] + lower
+        vec[4] = bound_len / len(Mi.Bruises) * vec[4] + lower
+        vec[5] = bound_len / len(Mi.Odor) * vec[5] + lower
+        vec[6] = bound_len / len(Mi.GillAttachment) * vec[6] + lower
+        vec[7] = bound_len / len(Mi.GillSpacing) * vec[7] + lower
+        vec[8] = bound_len / len(Mi.GillSize) * vec[8] + lower
+        vec[9] = bound_len / len(Mi.GillColor) * vec[9] + lower
+        vec[10] = bound_len / len(Mi.StalkShape) * vec[10] + lower
+        vec[11] = bound_len / len(Mi.StalkRoot) * vec[11] + lower
+        vec[12] = bound_len / len(Mi.StalkSurfaceAboveRing) * vec[12] + lower
+        vec[13] = bound_len / len(Mi.StalkSurfaceBelowRing) * vec[13] + lower
+        vec[14] = bound_len / len(Mi.StalkColorAboveRing) * vec[14] + lower
+        vec[15] = bound_len / len(Mi.StalkColorBelowRing) * vec[15] + lower
+        vec[16] = bound_len / len(Mi.VeilType) * vec[16] + lower
+        vec[17] = bound_len / len(Mi.VeilColor) * vec[17] + lower
+        vec[18] = bound_len / len(Mi.RingNumber) * vec[18] + lower
+        vec[19] = bound_len / len(Mi.RingType) * vec[19] + lower
+        vec[20] = bound_len / len(Mi.SporePrintColor) * vec[20] + lower
+        vec[21] = bound_len / len(Mi.Population) * vec[21] + lower
+        vec[22] = bound_len / len(Mi.Habitat) * vec[21] + lower
         return vec
 
     def set_prediction(self, output):
