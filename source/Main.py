@@ -10,7 +10,7 @@ output_number = 1
 
 
 def main():
-    layers = load_layers()
+    layers = eval(sys.argv[1])
     ml = Ml.MushroomLoader('../data/agaricus-lepiota.data')
     im = ml.import_mushrooms()
     mushrooms = make_mushrooms(ml, im)
@@ -22,14 +22,6 @@ def main():
         mnn.calculate_output(training_set)
         mnn.calculate_output(validation_set)
         print_stats(training_set, validation_set)
-
-
-def load_layers():
-    layers = []
-    layers_arg = eval(sys.argv[1])
-    for i in range(len(layers_arg)):
-        layers.append(int(layers_arg[i]))
-    return layers
 
 
 def make_mushrooms(ml, im):
