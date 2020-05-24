@@ -1,45 +1,35 @@
 import source.MushroomLoader as Ml
 import source.Mushroom as Mushroom
 import source.MushroomInfo as Mi
-import source.NeuralNetwork as Nn
-import numpy as np
+import source.MushroomNeuralNetwork as Mnn
 import random
 import sys
 
+input_number = 22
+output_number = 1
+
 
 def main():
-    input_number, layers, output_number, method = load_params()
+    layers = load_layers()
     ml = Ml.MushroomLoader('../data/agaricus-lepiota.data')
     im = ml.import_mushrooms()
     mushrooms = make_mushrooms(ml, im)
     edible_mushrooms, poisonous_mushrooms = split_poisonous(mushrooms)
     training_set, validation_set = make_sets(edible_mushrooms, poisonous_mushrooms)
-    nn = Nn.NeuralNetwork(input_number, layers, output_number)
+    mnn = Mnn.MushroomNeuralNetwork(input_number, layers, output_number)
     for i in range(10):
-        nn.delta_svg(training_set, 0.9)
-        nn.calculate_set(validation_set)
-        print_stats(validation_set)
-    # save_mushrooms(validation_set)
+        mnn.train_network(training_set, 0.9)
+        mnn.calculate_output(training_set)
+        mnn.calculate_output(validation_set)
+        print_stats(training_set, validation_set)
 
 
-def load_params():
-    # if len(sys.argv) != 5:
-    #     exit(1)
-    input_number = int(sys.argv[1])
+def load_layers():
     layers = []
-    second_arg = eval(sys.argv[2])
-    for i in range(len(second_arg)):
-        layers.append(int(second_arg[i]))
-    output_number = int(sys.argv[3])
-    method = 0
-    if sys.argv[4] == 'batch':
-        method = 0
-    else:
-        if sys.argv[4] == 'svg':
-            method = 1
-        else:
-            exit(2)
-    return input_number, layers, output_number, method
+    layers_arg = eval(sys.argv[1])
+    for i in range(len(layers_arg)):
+        layers.append(int(layers_arg[i]))
+    return layers
 
 
 def make_mushrooms(ml, im):
@@ -91,16 +81,20 @@ def make_sets(edible_mushrooms, poisonous_mushrooms):
     return training_set, validation_set
 
 
-def print_stats(mushroom_set):
+def print_stats(training_set, validation_set):
     correct = 0
-    for i in range(len(mushroom_set)):
-        if mushroom_set[i].check_prediction():
+    for i in range(len(training_set)):
+        if training_set[i].check_prediction():
             correct = correct + 1
-    print("There are " + str(correct) + " correct predictions from " + str(len(mushroom_set)) + " mushrooms (" + str(correct/len(mushroom_set)*100) + "%).")
+    print("Training: There are " + str(correct) + " correct predictions from "
+          + str(len(training_set)) + " mushrooms (" + str(correct/len(training_set)*100) + "%).")
 
-
-def save_mushrooms(mushroom_set):
-    mushroom_set = mushroom_set
+    correct = 0
+    for i in range(len(validation_set)):
+        if validation_set[i].check_prediction():
+            correct = correct + 1
+    print("Validation: There are " + str(correct) + " correct predictions from "
+          + str(len(validation_set)) + " mushrooms (" + str(correct/len(validation_set)*100) + "%).")
 
 
 if __name__ == "__main__":

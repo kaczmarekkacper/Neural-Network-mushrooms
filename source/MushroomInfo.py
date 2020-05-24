@@ -2,198 +2,198 @@ from enum import Enum
 
 
 class Edible(Enum):
+    No = 0  # p
     Yes = 1  # e
-    No = 2  # p
-    NoInfo = 3
+    NoInfo = 2
 
 
 class CapShape(Enum):  # kształt kapelusza
-    Bell = -1.3363  # b Dzwon
-    Conical = -0.8018  # c Stożkowy
-    Convex = -0.2673  # x Wypukły
-    Flat = 0.2673  # f Płaski
-    Knobbed = 0.8018  # k Wybrzuszony
-    Sunken = 1.3363  # s Wklęsły
+    Bell = 1  # b Dzwon
+    Conical = 2  # c Stożkowy
+    Convex = 3  # x Wypukły
+    Flat = 4  # f Płaski
+    Knobbed = 5  # k Wybrzuszony
+    Sunken = 6  # s Wklęsły
 
 
 class CapSurface(Enum):  # Powierzchnia kapelusza
-    Fibrous = -1.1619  # f Włóknisty
-    Grooves = -0.3873 # g Wypustkowaty
-    Scaly = 0.3873  # t Łuskowaty
-    Smooth = 1.1619 # s Gładki
+    Fibrous = 1  # f Włóknisty
+    Grooves = 2  # g Wypustkowaty
+    Scaly = 3  # t Łuskowaty
+    Smooth = 4  # s Gładki
 
 
 class CapColor(Enum):
-    Brown = -1.4863  # n Brązowy
-    Buff = -1.1560  # b Kolor skóry (brązowo-żółtyO
-    Cinnamon = -0.8257  # c Cynamonowy
-    Gray = -0.4954  # g Szary
-    Green = -0.1651  # r Zielony
-    Pink = 0.1651  # p Różowy
-    Purple = 0.4954   # u Fioletowy
-    Red = 0.8257  # e Czerwony
-    White = 1.1560  # w Biały
-    Yellow = 1.4863  # y Żółty
+    Brown = 1  # n Brązowy
+    Buff = 2  # b Kolor skóry (brązowo-żółtyO
+    Cinnamon = 3  # c Cynamonowy
+    Gray = 4  # g Szary
+    Green = 5  # r Zielony
+    Pink = 6  # p Różowy
+    Purple = 7  # u Fioletowy
+    Red = 8  # e Czerwony
+    White = 9  # w Biały
+    Yellow = 10  # y Żółty
 
 
 class Bruises(Enum):  # Siniaki
-    Yes = -0.7071  # t Tak
-    No = 0.7071  # f Nie
+    Yes = 1  # t Tak
+    No = 2  # f Nie
 
 
 class Odor(Enum):  # Zapach
-    Almond = -1.4606   # a Migdałowy
-    Anise = -1.0954   # l Anyż
-    Creosote = -0.7303  # c Kreozot
-    Fishy = -0.3651  # y Rybny(podejrzany)
-    Foul = 0  # f Mdły
-    Musty = 0.3651  # m Stęchły
-    Without = 0.7303  # n Bez
-    Pungent = 1.0954   # p Cierpki, Ostry, Gryzący
-    Spicy = 1.4606   # s Pikantny, Korzenny
+    Almond = 1  # a Migdałowy
+    Anise = 2  # l Anyż
+    Creosote = 3  # c Kreozot
+    Fishy = 4  # y Rybny(podejrzany)
+    Foul = 5  # f Mdły
+    Musty = 6  # m Stęchły
+    Without = 7  # n Bez
+    Pungent = 8  # p Cierpki, Ostry, Gryzący
+    Spicy = 9  # s Pikantny, Korzenny
 
 
 class GillAttachment(Enum):  # Załącznik blaszek
-    Attached = -1.1619  # a Przywiązane
-    Descending = -0.3873  # d Schodzące
-    Free = 0.3873   # f Wolne
-    Notched = 1.1619 # n Zaząbkowane
+    Attached = 1  # a Przywiązane
+    Descending = 2  # d Schodzące
+    Free = 3  # f Wolne
+    Notched = 4  # n Zaząbkowane
 
 
 class GillSpacing(Enum):  # Odległości blaszek
-    Close = -1  # c Blisko
-    Crowded = 0  # w Tłoczno
-    Distant = 1  # d Odległe
+    Close = 1  # c Blisko
+    Crowded = 2  # w Tłoczno
+    Distant = 3  # d Odległe
 
 
 class GillSize(Enum):  # Wielkości blaszek
-    Broad = -0.7071  # b Szerokie
-    Narrow = 0.7071  # n Wąskie
+    Broad = 1  # b Szerokie
+    Narrow = 2  # n Wąskie
 
 
 class GillColor(Enum):  # Kolory blaszek
-    Black = -1.5254   # k
-    Brown = -1.2481  # n
-    Buff = -0.9707  # b
-    Chocolate = -0.6934  # h
-    Gray = -0.4160  # g
-    Green = -0.1387  # r
-    Orange = 0.1387  # o
-    Pink = 0.4160  # p
-    Purple = 0.6934  # u
-    Red = 0.9707  # e
-    White = 1.2481  # w
-    Yellow = 1.5254   # y
+    Black = 1  # k
+    Brown = 2  # n
+    Buff = 3  # b
+    Chocolate = 4  # h
+    Gray = 5  # g
+    Green = 6  # r
+    Orange = 7  # o
+    Pink = 8  # p
+    Purple = 9  # u
+    Red = 10  # e
+    White = 11  # w
+    Yellow = 12  # y
 
 
 class StalkShape(Enum):  # Kształt łodygi
-    Enlarging = -0.7071  # e Powiększająca się
-    Tapering = 0.7071  # t Zmniejszająca się
+    Enlarging = 1  # e Powiększająca się
+    Tapering = 2  # t Zmniejszająca się
 
 
 class StalkRoot(Enum):  # Korzeń łodygi
-    Bulbous = -1.3887  # b Bulwa
-    Club = -0.9258  # c Maczuga
-    Cup = -0.4629 # u Puchar
-    Equal = 0  # e Równa
-    Rhizomorphs = 0.4629  # z Ryzomorfy(takie długie czarne korzenie)
-    Rooted = 0.9258  # r Normalne
-    Missing = 1.3887  # ? Bez
+    Bulbous = 1  # b Bulwa
+    Club = 2  # c Maczuga
+    Cup = 3  # u Puchar
+    Equal = 4  # e Równa
+    Rhizomorphs = 5  # z Ryzomorfy(takie długie czarne korzenie)
+    Rooted = 6  # r Normalne
+    Missing = 7  # ? Bez
 
 
 class StalkSurfaceAboveRing(Enum):  # Powierzchnia łodyg powyżej pierścienia
-    Fibrous = -1.1619  # f Włoknisty
-    Scaly = -0.3873  # y Łuszczący się
-    Silky = 0.3873   # k Jedwabisty
-    Smooth = 1.1619  # s Gładki
+    Fibrous = 1  # f Włoknisty
+    Scaly = 2  # y Łuszczący się
+    Silky = 3  # k Jedwabisty
+    Smooth = 4  # s Gładki
 
 
 class StalkSurfaceBelowRing(Enum):  # Powierzchnia łodyg poniżej pierwscienia
-    Fibrous = -1.1619  # f Włoknisty
-    Scaly = -0.3873   # y Łuszczący się
-    Silky = 0.3873  # k Jedwabisty
-    Smooth = 1.1619   # s Gładki
+    Fibrous = 1  # f Włoknisty
+    Scaly = 2  # y Łuszczący się
+    Silky = 3  # k Jedwabisty
+    Smooth = 4  # s Gładki
 
 
 class StalkColorAboveRing(Enum):  # Kolor łodygi powyżej pierścienia
-    Brown = -1.4606  # n
-    Buff = -1.0954  # b
-    Cinnamon = -0.7303  # c
-    Gray = -0.3651  # g
-    Orange = 0  # o
-    Pink = 0.3651  # p
-    Red = 0.7303  # e
-    White = 1.0954  # w
-    Yellow = 1.4606  # y
+    Brown = 1  # n
+    Buff = 2  # b
+    Cinnamon = 3  # c
+    Gray = 4  # g
+    Orange = 5  # o
+    Pink = 6  # p
+    Red = 7  # e
+    White = 8  # w
+    Yellow = 9  # y
 
 
 class StalkColorBelowRing(Enum):  # Kolor łodygi powyżej pierścienia
-    Brown = -1.4606  # n
-    Buff = -1.0954  # b
-    Cinnamon = -0.7303  # c
-    Gray = -0.3651  # g
-    Orange = 0  # o
-    Pink = 0.3651  # p
-    Red = 0.7303  # e
-    White = 1.0954  # w
-    Yellow = 1.4606  # y
+    Brown = 1  # n
+    Buff = 2  # b
+    Cinnamon = 3  # c
+    Gray = 4  # g
+    Orange = 5  # o
+    Pink = 6  # p
+    Red = 7  # e
+    White = 8  # w
+    Yellow = 9  # y
 
 
 class VeilType(Enum):  # Rodzaj osłony
-    Partial = -0.7071  # p Częściowy
-    Universal = 0.7071  # u https://en.wikipedia.org/wiki/Universal_veil
+    Partial = 1  # p Częściowy
+    Universal = 2  # u https://en.wikipedia.org/wiki/Universal_veil
 
 
 class VeilColor(Enum):  # Kolor osłony
-    Brown = -1.1619  # n
-    Orange = -0.3873  # o
-    White = 0.3873  # w
-    Yellow = 1.1619  # y
+    Brown = 1  # n
+    Orange = 2  # o
+    White = 3  # w
+    Yellow = 4  # y
 
 
 class RingNumber(Enum):  # Liczba pierścieni
-    Zero = -1  # n
-    One = 0  # o
-    Two = 1  # t
+    Zero = 1  # n
+    One = 2  # o
+    Two = 3  # t
 
 
 class RingType(Enum):  # Rodzaj pierścienia
-    Cobwebby = -1.4289  # c Pajęczynowy
-    Evanescent = -1.4289  # e Zanikający
-    Flaring = -0.6124 # f Kloszowy
-    Large = -0.2041   # l Duży
-    No = 0.2041  # n Bez
-    Pendant = 0.6124  # p Wisiorek
-    Sheathing = 1.0206   # s Poszycie
-    Zone = 1.4289  # z Strefowy
+    Cobwebby = 1  # c Pajęczynowy
+    Evanescent = 2  # e Zanikający
+    Flaring = 3  # f Kloszowy
+    Large = 4  # l Duży
+    No = 5  # n Bez
+    Pendant = 6  # p Wisiorek
+    Sheathing = 7  # s Poszycie
+    Zone = 8  # z Strefowy
 
 
 class SporePrintColor(Enum):
-    Black =  -1.4606   # k
-    Brown = -1.0954  # n
-    Buff = -0.7303   # b
-    Chocolate = -0.3651  # h
-    Green = 0  # r
-    Orange = 0.3651  # o
-    Purple = 0.7303   # u
-    White = 1.0954  # w
-    Yellow = 1.4606   # y
+    Black = 1  # k
+    Brown = 2  # n
+    Buff = 3  # b
+    Chocolate = 4  # h
+    Green = 5  # r
+    Orange = 6  # o
+    Purple = 7  # u
+    White = 8  # w
+    Yellow = 9  # y
 
 
 class Population(Enum):  # Populacja
-    Abundant = -1.3363  # a Obfita
-    Clustered = -0.8018  # c Zgrupowane
-    Numerous = -0.2673  # n Liczna
-    Scattered = 0.2673 # s Rozsiana
-    Several = 0.8018   # v Kilka
-    Solitary = 1.3363  # y Samotny
+    Abundant = 1  # a Obfita
+    Clustered = 2  # c Zgrupowane
+    Numerous = 3  # n Liczna
+    Scattered = 4  # s Rozsiana
+    Several = 5  # v Kilka
+    Solitary = 6  # y Samotny
 
 
 class Habitat(Enum):  # Siedlisko
-    Grasses = -1.3887  # g Trawy
-    Leaves = -0.9258  # l Liście
-    Meadows = -0.4629  # m Łąki
-    Paths = 0  # p Ścieżki
-    Urban = 0.4629  # u Miasto
-    Waste = 0.9258  # w Pustkowie
-    Woods = 1.3887  # d Las
+    Grasses = 1  # g Trawy
+    Leaves = 2  # l Liście
+    Meadows = 3  # m Łąki
+    Paths = 4  # p Ścieżki
+    Urban = 5  # u Miasto
+    Waste = 6  # w Pustkowie
+    Woods = 7  # d Las
