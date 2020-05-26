@@ -11,17 +11,21 @@ output_number = 1
 
 def main():
     layers = eval(sys.argv[1])
+    epochs = eval(sys.argv[2])
     ml = Ml.MushroomLoader('../data/agaricus-lepiota.data')
     im = ml.import_mushrooms()
     mushrooms = make_mushrooms(ml, im)
+    Mushroom.Mushroom.set_std_and_mean_values(mushrooms)
     edible_mushrooms, poisonous_mushrooms = split_poisonous(mushrooms)
     training_set, validation_set = make_sets(edible_mushrooms, poisonous_mushrooms)
     mnn = Mnn.MushroomNeuralNetwork(input_number, layers, output_number)
-    for i in range(10):
+    for i in range(epochs):
         mnn.train_network(training_set, 0.9)
         mnn.calculate_output(training_set)
         mnn.calculate_output(validation_set)
-        print_stats(training_set, validation_set)
+        [train_per, valid_per] = print_stats(training_set, validation_set)
+        if valid_per == 100:
+            break
 
 
 def make_mushrooms(ml, im):
@@ -70,6 +74,7 @@ def make_sets(edible_mushrooms, poisonous_mushrooms):
     # shuffle sets
     random.shuffle(training_set)
     random.shuffle(validation_set)
+
     return training_set, validation_set
 
 
@@ -78,15 +83,19 @@ def print_stats(training_set, validation_set):
     for i in range(len(training_set)):
         if training_set[i].check_prediction():
             correct = correct + 1
+    training_percent = correct/len(training_set)*100
     print("Training: There are " + str(correct) + " correct predictions from "
-          + str(len(training_set)) + " mushrooms (" + str(correct/len(training_set)*100) + "%).")
+          + str(len(training_set)) + " mushrooms (" + str(training_percent) + "%).")
 
     correct = 0
     for i in range(len(validation_set)):
         if validation_set[i].check_prediction():
             correct = correct + 1
+    validation_percent = correct/len(validation_set)*100
     print("Validation: There are " + str(correct) + " correct predictions from "
-          + str(len(validation_set)) + " mushrooms (" + str(correct/len(validation_set)*100) + "%).")
+          + str(len(validation_set)) + " mushrooms (" + str(validation_percent) + "%).")
+
+    return training_percent, validation_percent
 
 
 if __name__ == "__main__":

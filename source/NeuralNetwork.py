@@ -64,7 +64,7 @@ class NeuralNetwork:
         # Forward propagation - outputs of layers in neurons
         self.calculate_output(vec)
         out = self.output
-        error += 0.5 * (desire_output- out)**2
+        error += 0.5 * (desire_output - out)**2
         # Compute delta error of the output layer
         out_delta = (desire_output - out) * Neuron.Neuron.der_func(out)
         # Compute delta of the hidden layers
@@ -94,5 +94,3 @@ class NeuralNetwork:
             weights_change = np.multiply(weights_change, learning_rate)
             self.weights[i - 1] += np.transpose(weights_change)
         return error
-
-
