@@ -17,10 +17,10 @@ output_number = 1
 def main():
     layers = eval(sys.argv[1])
     epochs = eval(sys.argv[2])
-    method = sys.argv[3]
-    learning_rate = 0.9
+    learning_rate = eval(sys.argv[3])
+    method = sys.argv[4]
     if method == "batch":
-        batch_no = eval(sys.argv[4])
+        batch_no = eval(sys.argv[5])
     ml = Ml.MushroomLoader('../data/agaricus-lepiota.data')
     im = ml.import_mushrooms()
     mushrooms = make_mushrooms(ml, im)
