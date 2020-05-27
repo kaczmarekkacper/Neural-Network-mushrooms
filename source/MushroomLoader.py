@@ -1,3 +1,8 @@
+"""
+    File name: MushroomLoader.py
+    Author: Kacper Kaczmarek
+    Python Version: 3.6.0
+"""
 import re
 
 

@@ -1,3 +1,8 @@
+"""
+    File name: Main.py
+    Author: Kacper Kaczmarek
+    Python Version: 3.6.0
+"""
 import source.MushroomLoader as Ml
 import source.Mushroom as Mushroom
 import source.MushroomInfo as Mi
@@ -12,6 +17,10 @@ output_number = 1
 def main():
     layers = eval(sys.argv[1])
     epochs = eval(sys.argv[2])
+    method = sys.argv[3]
+    learning_rate = 0.9
+    if method == "batch":
+        batch_no = eval(sys.argv[4])
     ml = Ml.MushroomLoader('../data/agaricus-lepiota.data')
     im = ml.import_mushrooms()
     mushrooms = make_mushrooms(ml, im)
@@ -20,7 +29,12 @@ def main():
     training_set, validation_set = make_sets(edible_mushrooms, poisonous_mushrooms)
     mnn = Mnn.MushroomNeuralNetwork(input_number, layers, output_number)
     for i in range(epochs):
-        mnn.train_network(training_set, 0.9)
+        if method == "svg":
+            mnn.train_network_svg(training_set, learning_rate)
+        elif method == "batch":
+            mnn.train_network_mini_batch(training_set, learning_rate, batch_no)
+        else:
+            raise Exception("Method name should be 'svg' or 'batch'")
         mnn.calculate_output(training_set)
         mnn.calculate_output(validation_set)
         [train_per, valid_per] = print_stats(training_set, validation_set)

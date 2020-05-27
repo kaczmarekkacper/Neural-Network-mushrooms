@@ -1,3 +1,8 @@
+"""
+    File name: NeuralNetworkTest.py
+    Author: Kacper Kaczmarek
+    Python Version: 3.6.0
+"""
 import unittest
 import source.NeuralNetwork as Nn
 import source.Neuron as Neuron
