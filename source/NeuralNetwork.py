@@ -1,3 +1,8 @@
+"""
+    File name: NeuralNetwork.py
+    Author: Kacper Kaczmarek, Krzysztof Kobyliński
+    Python Version: 3.6.0
+"""
 import numpy as np
 import source.Neuron as Neuron
 
@@ -59,19 +64,46 @@ class NeuralNetwork:
                 self.weights.append(np.ones((self.sizes[i], self.sizes[i - 1]+1)))
             self.weights.append(np.ones((self.output.size, self.sizes[self.hidden_layers - 1]+1)))
 
-    def train_network(self, vec, learning_rate, desire_output):
-        error = 0
+    def train_network_svg(self, train_set, learning_rate, desire_outputs):
+        sum_error = 0
+        for i in range(len(train_set)):
+            [weights_change, error] = self.compute_weights(train_set[i], learning_rate, desire_outputs[i])
+            sum_error += error
+            for layer in range(self.hidden_layers + 1):
+                self.weights[layer] = np.add(self.weights[layer], weights_change[layer])
+        return sum_error
+
+    def train_network_mini_batch(self, train_set, learning_rate, desire_outputs, batch_no):
+        sum_error = 0
+        weights_batch = []
+        for i in range(len(train_set)):
+            [weights_change, error] = self.compute_weights(train_set[i], learning_rate, desire_outputs[i])
+            sum_error += error
+            if len(weights_batch) == 0:
+                weights_batch = weights_change
+            else:
+                for layer in range(self.hidden_layers + 1):
+                    weights_batch[layer] = np.add(weights_batch[layer], weights_change[layer])
+            if (i+1) % batch_no == 0:
+                for layer in range(self.hidden_layers + 1):
+                    self.weights[layer] = np.add(self.weights[layer], np.divide(weights_batch[layer], batch_no))
+                weights_batch = []
+        if len(weights_batch) != 0:
+            for l in range(self.hidden_layers + 1):
+                self.weights[l] = np.add(self.weights[l], np.divide(weights_batch[l], len(train_set) % batch_no))
+        return sum_error
+
+    def compute_weights(self, vec, learning_rate, desire_output):
         # Forward propagation - outputs of layers in neurons
         self.calculate_output(vec)
         out = self.output
-        error += 0.5 * (desire_output- out)**2
+        sum_error = 0.5 * (sum(np.subtract(desire_output, out)**2))
         # Compute delta error of the output layer
-        out_delta = (desire_output - out) * Neuron.Neuron.der_func(out)
+        out_delta = np.multiply(np.subtract(desire_output, out), Neuron.Neuron.der_func(out))
         # Compute delta of the hidden layers
         next_weights = self.weights[-1]  # output layer weights
-        next_delta = out_delta
+        next_delta = np.transpose(out_delta)
         hidden_delta = []
-        # neurons - inputs, hidden1, hidden2, output (outputs)
         for i in reversed(range(1, self.hidden_layers + 1)):
             inputs_nr = np.size(next_weights, 1)
             hid_lay_out = self.neurons[i]
@@ -79,20 +111,19 @@ class NeuralNetwork:
             hid_lay_out = Neuron.Neuron.der_func(hid_lay_out)
             error = np.matmul(next_delta, next_weights[:, 0:inputs_nr - 1])
             hidden_delta.insert(0, np.multiply(error, hid_lay_out))
-            # weights - hidden1, hidden2, output
             next_weights = self.weights[i - 1]
             next_delta = hidden_delta[0]
 
-        # Update output layer weights
-        weights_change = np.matmul(self.neurons[-2], out_delta)
+        computed_weights_change = []
+        # Output layers weights
+        weights_change = np.matmul(self.neurons[-2], np.transpose(out_delta))
         weights_change = np.multiply(weights_change, learning_rate)
-        self.weights[-1] += np.transpose(weights_change)
+        computed_weights_change.insert(0, np.transpose(weights_change))
 
-        # Update hidden layers weights
+        # Hidden layers weights
         for i in reversed(range(1, self.hidden_layers + 1)):
             weights_change = np.matmul(self.neurons[i - 1], hidden_delta[i - 1])
             weights_change = np.multiply(weights_change, learning_rate)
-            self.weights[i - 1] += np.transpose(weights_change)
-        return error
+            computed_weights_change.insert(0, np.transpose(weights_change))
 
-
+        return [computed_weights_change, sum_error]

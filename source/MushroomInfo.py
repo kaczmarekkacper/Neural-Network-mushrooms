@@ -1,3 +1,8 @@
+"""
+    File name: MushroomInfo.py
+    Author: Kacper Kaczmarek
+    Python Version: 3.6.0
+"""
 from enum import Enum
 
 

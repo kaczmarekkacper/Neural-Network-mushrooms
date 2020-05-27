@@ -1,3 +1,8 @@
+"""
+    File name: MushroomTest.py
+    Author: Kacper Kaczmarek
+    Python Version: 3.6.0
+"""
 import unittest
 import source.Mushroom as Mushroom
 import source.MushroomInfo as Mi

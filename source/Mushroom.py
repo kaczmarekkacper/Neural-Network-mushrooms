@@ -1,7 +1,17 @@
+"""
+    File name: Mushroom.py
+    Author: Kacper Kaczmarek, Krzysztof Kobyliński
+    Python Version: 3.6.0
+"""
 import source.MushroomInfo as Mi
+import numpy as np
 
 
 class Mushroom:
+
+    mean_values = []
+    std_values = []
+
     def __init__(self, vec):
         self.prediction = Mi.Edible.NoInfo
         self.edible = self.set_edible(vec[0])
@@ -40,34 +50,23 @@ class Mushroom:
 
     def get_normalized_vector(self):
         vec = self.get_vector()
-        vec = Mushroom.normalize_vector(vec, -1, 1)
+        vec = Mushroom.normalize_vector(vec)
         return vec
 
     @staticmethod
-    def normalize_vector(vec, lower, upper):
-        bound_len = upper - lower
-        vec[0] = bound_len / len(Mi.CapShape)*vec[0]+lower
-        vec[1] = bound_len / len(Mi.CapSurface) * vec[1] + lower
-        vec[2] = bound_len / len(Mi.CapColor) * vec[2] + lower
-        vec[3] = bound_len / len(Mi.Bruises) * vec[3] + lower
-        vec[4] = bound_len / len(Mi.Odor) * vec[4] + lower
-        vec[5] = bound_len / len(Mi.GillAttachment) * vec[5] + lower
-        vec[6] = bound_len / len(Mi.GillSpacing) * vec[6] + lower
-        vec[7] = bound_len / len(Mi.GillSize) * vec[7] + lower
-        vec[8] = bound_len / len(Mi.GillColor) * vec[8] + lower
-        vec[9] = bound_len / len(Mi.StalkShape) * vec[9] + lower
-        vec[10] = bound_len / len(Mi.StalkRoot) * vec[10] + lower
-        vec[11] = bound_len / len(Mi.StalkSurfaceAboveRing) * vec[11] + lower
-        vec[12] = bound_len / len(Mi.StalkSurfaceBelowRing) * vec[12] + lower
-        vec[13] = bound_len / len(Mi.StalkColorAboveRing) * vec[13] + lower
-        vec[14] = bound_len / len(Mi.StalkColorBelowRing) * vec[14] + lower
-        vec[15] = bound_len / len(Mi.VeilType) * vec[15] + lower
-        vec[16] = bound_len / len(Mi.VeilColor) * vec[16] + lower
-        vec[17] = bound_len / len(Mi.RingNumber) * vec[17] + lower
-        vec[18] = bound_len / len(Mi.RingType) * vec[18] + lower
-        vec[19] = bound_len / len(Mi.SporePrintColor) * vec[19] + lower
-        vec[20] = bound_len / len(Mi.Population) * vec[20] + lower
-        vec[21] = bound_len / len(Mi.Habitat) * vec[21] + lower
+    def set_std_and_mean_values(mushrooms):
+        mushrooms_set = []
+        for m in mushrooms:
+            mushrooms_set.append(m.get_vector())
+        Mushroom.std_values = np.std(mushrooms_set, axis=0)
+        Mushroom.std_values = np.array(Mushroom.std_values, dtype=float)
+        Mushroom.mean_values = np.mean(mushrooms_set, axis=0)
+        Mushroom.mean_values = np.array(Mushroom.mean_values, dtype=float)
+
+    @staticmethod
+    def normalize_vector(vec):
+        vec = np.subtract(vec, Mushroom.mean_values)
+        vec = np.divide(vec, Mushroom.std_values, out=np.zeros_like(Mushroom.std_values), where=Mushroom.std_values != 0)
         return vec
 
     def set_prediction(self, output):
@@ -79,7 +78,7 @@ class Mushroom:
             self.error = 0 - output
 
     def check_prediction(self):
-        return abs(self.prediction.value - self.edible.value)
+        return not abs(self.prediction.value - self.edible.value)
 
     @staticmethod
     def set_edible(feature):
