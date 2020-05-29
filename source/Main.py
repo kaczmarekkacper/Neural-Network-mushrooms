@@ -46,19 +46,19 @@ def main():
         [train_per, valid_per] = print_stats(training_set, validation_set)
         train_err.append(100 - train_per)
         valid_err.append(100 - valid_per)
-        start = 0
-        stop = 0
+        start = []
+        stop = []
 
         # Learning
         for i in range(epochs):
-            start = time.time()
+            start.append(time.time())
             if method == "svg":
                 mnn.train_network_svg(training_set, learning_rate)
             elif method == "batch":
                 mnn.train_network_mini_batch(training_set, learning_rate, batch_no)
             else:
                 raise Exception("Method name should be 'svg' or 'batch'")
-            stop = time.time()
+            stop.append(time.time())
             mnn.calculate_output(training_set)
             mnn.calculate_output(validation_set)
             [train_per, valid_per] = print_stats(training_set, validation_set)
@@ -69,7 +69,7 @@ def main():
 
         r_epochs = len(train_err)
         # Last train error, last test error, number of epochs, time per epoch
-        results_matrix.append([train_err[r_epochs - 1], valid_err[r_epochs - 1], r_epochs, stop - start])
+        results_matrix.append([train_err[r_epochs - 1], valid_err[r_epochs - 1], r_epochs, np.mean(np.subtract(stop, start))])
         t = np.arange(0., r_epochs, 1.)
         plt.plot(t, train_err, t, valid_err)
         # plt.xticks(np.arange(min(t), max(t) + 1, 1.0))
