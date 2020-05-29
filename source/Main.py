@@ -9,6 +9,9 @@ import source.MushroomInfo as Mi
 import source.MushroomNeuralNetwork as Mnn
 import random
 import sys
+import matplotlib.pyplot as plt
+import numpy as np
+import time
 
 input_number = 22
 output_number = 1
@@ -21,25 +24,65 @@ def main():
     method = sys.argv[4]
     if method == "batch":
         batch_no = eval(sys.argv[5])
+    else:
+        batch_no = 0
     ml = Ml.MushroomLoader('../data/agaricus-lepiota.data')
     im = ml.import_mushrooms()
     mushrooms = make_mushrooms(ml, im)
     Mushroom.Mushroom.set_std_and_mean_values(mushrooms)
     edible_mushrooms, poisonous_mushrooms = split_poisonous(mushrooms)
-    training_set, validation_set = make_sets(edible_mushrooms, poisonous_mushrooms)
-    mnn = Mnn.MushroomNeuralNetwork(input_number, layers, output_number)
-    for i in range(epochs):
-        if method == "svg":
-            mnn.train_network_svg(training_set, learning_rate)
-        elif method == "batch":
-            mnn.train_network_mini_batch(training_set, learning_rate, batch_no)
-        else:
-            raise Exception("Method name should be 'svg' or 'batch'")
+    results_matrix = []
+
+    # launch 10 times
+    for iteration in range(10):
+        # Shuffle data again, another initial weights in neural network
+        training_set, validation_set = make_sets(edible_mushrooms, poisonous_mushrooms)
+        mnn = Mnn.MushroomNeuralNetwork(input_number, layers, output_number)
+        train_err = []
+        valid_err = []
+        # Initial error
         mnn.calculate_output(training_set)
         mnn.calculate_output(validation_set)
         [train_per, valid_per] = print_stats(training_set, validation_set)
-        if valid_per == 100:
-            break
+        train_err.append(100 - train_per)
+        valid_err.append(100 - valid_per)
+        start = 0
+        stop = 0
+
+        # Learning
+        for i in range(epochs):
+            start = time.time()
+            if method == "svg":
+                mnn.train_network_svg(training_set, learning_rate)
+            elif method == "batch":
+                mnn.train_network_mini_batch(training_set, learning_rate, batch_no)
+            else:
+                raise Exception("Method name should be 'svg' or 'batch'")
+            stop = time.time()
+            mnn.calculate_output(training_set)
+            mnn.calculate_output(validation_set)
+            [train_per, valid_per] = print_stats(training_set, validation_set)
+            train_err.append(100 - train_per)
+            valid_err.append(100 - valid_per)
+            if valid_per == 100:
+                break
+
+        r_epochs = len(train_err)
+        # Last train error, last test error, number of epochs, time per epoch
+        results_matrix.append([train_err[r_epochs - 1], valid_err[r_epochs - 1], r_epochs, stop - start])
+        t = np.arange(0., r_epochs, 1.)
+        plt.plot(t, train_err, t, valid_err)
+        # plt.xticks(np.arange(min(t), max(t) + 1, 1.0))
+        plt.xlabel('Epoch of learning')
+        plt.ylabel('Classification error [%]')
+        plt.legend(['Train error', 'Test error'])
+        plt.savefig('../results/{}_e{}_lr{}_{}_bno_{}_{}.png'.format(layers, epochs, learning_rate, method, batch_no, iteration))
+        plt.show()
+        plt.close('all')
+    output = open('../results/{}_e{}_lr{}_{}_bno_{}.txt'.format(layers, epochs, learning_rate, method, batch_no), "w")
+    output.write(str(results_matrix) + '\n')
+    output.write(str(np.mean(results_matrix, axis=0)) + '\n')
+    output.close()
 
 
 def make_mushrooms(ml, im):
@@ -98,16 +141,18 @@ def print_stats(training_set, validation_set):
         if training_set[i].check_prediction():
             correct = correct + 1
     training_percent = correct/len(training_set)*100
+    format_train_per = "{:.2f}".format(training_percent)
     print("Training: There are " + str(correct) + " correct predictions from "
-          + str(len(training_set)) + " mushrooms (" + str(training_percent) + "%).")
+          + str(len(training_set)) + " mushrooms (" + str(format_train_per) + "%).")
 
     correct = 0
     for i in range(len(validation_set)):
         if validation_set[i].check_prediction():
             correct = correct + 1
     validation_percent = correct/len(validation_set)*100
+    format_val_per = "{:.2f}".format(validation_percent)
     print("Validation: There are " + str(correct) + " correct predictions from "
-          + str(len(validation_set)) + " mushrooms (" + str(validation_percent) + "%).")
+          + str(len(validation_set)) + " mushrooms (" + str(format_val_per) + "%).")
 
     return training_percent, validation_percent
 
