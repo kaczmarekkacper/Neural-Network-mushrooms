@@ -3,7 +3,7 @@
     Author: Krzysztof Kobyliński, Kacper Kaczmarek
     Python Version: 3.6.0
 """
-import source.NeuralNetwork as Nn
+import NeuralNetwork as Nn
 
 
 class MushroomNeuralNetwork:

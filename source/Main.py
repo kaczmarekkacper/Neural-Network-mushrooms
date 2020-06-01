@@ -3,10 +3,10 @@
     Author: Kacper Kaczmarek
     Python Version: 3.6.0
 """
-import source.MushroomLoader as Ml
-import source.Mushroom as Mushroom
-import source.MushroomInfo as Mi
-import source.MushroomNeuralNetwork as Mnn
+import MushroomLoader as Ml
+import Mushroom as Mushroom
+import MushroomInfo as Mi
+import MushroomNeuralNetwork as Mnn
 import random
 import sys
 import matplotlib.pyplot as plt
