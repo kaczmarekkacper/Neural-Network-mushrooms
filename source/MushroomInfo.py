@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
     File name: MushroomInfo.py
     Author: Kacper Kaczmarek

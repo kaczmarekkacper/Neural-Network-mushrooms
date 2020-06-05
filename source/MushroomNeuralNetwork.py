@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
     File name: MushroomNeuralNetwork.py
     Author: Krzysztof Kobyliński, Kacper Kaczmarek

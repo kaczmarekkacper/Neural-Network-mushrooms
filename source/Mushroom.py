@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
     File name: Mushroom.py
     Author: Kacper Kaczmarek, Krzysztof Kobyliński

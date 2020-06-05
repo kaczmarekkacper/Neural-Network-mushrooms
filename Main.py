@@ -1,17 +1,21 @@
+# -*- coding: utf-8 -*-
 """
     File name: Main.py
-    Author: Kacper Kaczmarek
+    Author: Kacper Kaczmarek, Krzysztof Kobyliński
     Python Version: 3.6.0
 """
-import source.MushroomLoader as Ml
-import source.Mushroom as Mushroom
-import source.MushroomInfo as Mi
-import source.MushroomNeuralNetwork as Mnn
 import random
 import sys
+import time
+import math
+
 import matplotlib.pyplot as plt
 import numpy as np
-import time
+
+import source.Mushroom as Mushroom
+import source.MushroomInfo as Mi
+import source.MushroomLoader as Ml
+import source.MushroomNeuralNetwork as Mnn
 
 input_number = 22
 output_number = 1
@@ -26,15 +30,15 @@ def main():
         batch_no = eval(sys.argv[5])
     else:
         batch_no = 0
-    ml = Ml.MushroomLoader('../data/agaricus-lepiota.data')
+    ml = Ml.MushroomLoader('data/agaricus-lepiota.data')
     im = ml.import_mushrooms()
     mushrooms = make_mushrooms(ml, im)
     Mushroom.Mushroom.set_std_and_mean_values(mushrooms)
     edible_mushrooms, poisonous_mushrooms = split_poisonous(mushrooms)
     results_matrix = []
 
-    # launch 10 times
-    for iteration in range(10):
+    # launch 25 times
+    for iteration in range(25):
         # Shuffle data again, another initial weights in neural network
         training_set, validation_set = make_sets(edible_mushrooms, poisonous_mushrooms)
         mnn = Mnn.MushroomNeuralNetwork(input_number, layers, output_number)
@@ -72,14 +76,13 @@ def main():
         results_matrix.append([train_err[r_epochs - 1], valid_err[r_epochs - 1], r_epochs, np.mean(np.subtract(stop, start))])
         t = np.arange(0., r_epochs, 1.)
         plt.plot(t, train_err, t, valid_err)
-        # plt.xticks(np.arange(min(t), max(t) + 1, 1.0))
         plt.xlabel('Epoch of learning')
         plt.ylabel('Classification error [%]')
         plt.legend(['Train error', 'Test error'])
-        plt.savefig('../results/{}_e{}_lr{}_{}_bno_{}_{}.png'.format(layers, epochs, learning_rate, method, batch_no, iteration))
+        plt.savefig('results/{}_e{}_lr{}_{}_bno_{}_{}.png'.format(layers, epochs, learning_rate, method, batch_no, iteration))
         plt.show()
         plt.close('all')
-    output = open('../results/{}_e{}_lr{}_{}_bno_{}.txt'.format(layers, epochs, learning_rate, method, batch_no), "w")
+    output = open('results/{}_e{}_lr{}_{}_bno_{}.txt'.format(layers, epochs, learning_rate, method, batch_no), "w")
     output.write(str(results_matrix) + '\n')
     output.write(str(np.mean(results_matrix, axis=0)) + '\n')
     output.close()
@@ -117,7 +120,7 @@ def make_sets(edible_mushrooms, poisonous_mushrooms):
     random.shuffle(poisonous_mushrooms)
 
     # split edible
-    for i in range(edible_half):
+    for i in range(math.floor(edible_half)):
         training_set.append(edible_mushrooms[i])
     for i in range(edible_half, len(edible_mushrooms)):
         validation_set.append(edible_mushrooms[i])
