@@ -5,7 +5,7 @@
     Python Version: 3.6.0
 """
 import numpy as np
-import source.Neuron as Neuron
+import Neuron as Neuron
 
 
 class NeuralNetwork:

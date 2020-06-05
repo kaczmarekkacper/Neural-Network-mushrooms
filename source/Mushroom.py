@@ -4,7 +4,7 @@
     Author: Kacper Kaczmarek, Krzysztof Kobyliński
     Python Version: 3.6.0
 """
-import source.MushroomInfo as Mi
+import MushroomInfo as Mi
 import numpy as np
 
 
