@@ -1,6 +1,6 @@
 """
     File name: TrainNetworkTest.py
-    Author: Krzysztof Kobyliński
+    Author: Krzysztof Kobylinski
     Python Version: 3.6.0
 """
 import unittest

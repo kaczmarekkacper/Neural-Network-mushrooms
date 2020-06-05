@@ -1,6 +1,7 @@
+# -*- coding: utf-8 -*-
 """
     File name: NeuralNetwork.py
-    Author: Kacper Kaczmarek, Krzysztof Kobyliński
+    Author: Kacper Kaczmarek, Krzysztof Kobyliski
     Python Version: 3.6.0
 """
 import numpy as np
